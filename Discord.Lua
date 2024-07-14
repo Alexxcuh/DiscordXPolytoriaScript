@@ -1,6 +1,6 @@
 LastMessage = ''
-Version = "1.7.0"
-APIVersion = "2.0.0"
+Version = "1.8.0"
+APIVersion = "2.1.0"
 nm = ""
 Outdated = false
 CurrentVersion = ""
