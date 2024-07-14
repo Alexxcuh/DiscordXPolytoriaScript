@@ -78,7 +78,7 @@ function CheckVersion(player)
                     Chat:UnicastMessage("Oh uh! Script is outdated!", player)
                 end
             else
-                Chat:UnicastMessage('DiscordXPolytoria v'.. Version, player)
+                Chat:UnicastMessage('DiscordXPolytoria v'.. Version ..'By '.. nm, player)
                 if Invite != "nope" then
                     Chat:UnicastMessage('Discord: '.. Invite, player)
                 end
