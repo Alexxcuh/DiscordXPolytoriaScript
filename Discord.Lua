@@ -48,7 +48,7 @@ function getMessage()
 end
 
 function CheckVersion(player)
-    Http:Get(API .."/version", function (data, error, errmsg)
+    Http:Get("https://frequent-satisfying-indigo.glitch.me/version", function (data, error, errmsg) -- DO NOT change the API call
         if not error then
             dataparsed = json.parse(data)
             nm = dataparsed["Credit"]
