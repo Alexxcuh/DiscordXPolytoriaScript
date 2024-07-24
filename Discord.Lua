@@ -1,12 +1,12 @@
 LastMessage = ''
-Version = "1.8.0"
-APIVersion = "2.1.0"
+Version = "1.9.0"
+APIVersion = "2.2.2"
 nm = ""
 Outdated = false
 CurrentVersion = ""
 CurrentAPIVersion = ""
-Invite = "YOUR_DISCORD_INVITE" -- if you dont have a discord just make it "nope"
-API = "YOUR_API_LINK" -- put here the link to your DiscordXPolytoria API
+Invite = "https://discord.gg/9GUJ8NWbKu" -- if you dont have a discord just make it "nope"
+API = "https://frequent-satisfying-indigo.glitch.me" -- put here the link to your DiscordXPolytoria API
 
 function SendNotice(after, user)
     players = game['Players']:GetPlayers()
@@ -20,6 +20,10 @@ function SendNotice(after, user)
             Chat:UnicastMessage(errormessage, user)
             print(errormessage)
         else
+            parsed = json.parse(data)
+            if parsed['banned'] == "true" then
+                user.Kick('You got permanently banned, with the reason: "'.. parsed['reason'] ..'" Goodbye.')
+            end
         end
     end, {})
 end
