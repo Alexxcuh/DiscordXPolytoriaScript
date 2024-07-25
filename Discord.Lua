@@ -7,6 +7,23 @@ CurrentVersion = ""
 CurrentAPIVersion = ""
 Invite = "https://discord.gg/9GUJ8NWbKu" -- if you dont have a discord just make it "nope"
 API = "https://frequent-satisfying-indigo.glitch.me" -- put here the link to your DiscordXPolytoria API
+ID = 
+
+local admins = {
+    "000000000", -- You can put your admin's id here. 
+    "000000000", 
+}
+
+function table_contains(tbl, x)
+    found = false
+    for _, v in pairs(tbl) do
+        if v == x then 
+            found = true 
+        end
+    end
+    return found
+end
+
 
 function SendNotice(after, user)
     players = game['Players']:GetPlayers()
@@ -28,11 +45,30 @@ function SendNotice(after, user)
     end, {})
 end
 
-function Send2Discord(message, user)
-    Http:Get(API .."/sendmsg?user=".. user.Name .."&message=".. message, function (data, error, errmsg)
+function DetectMessage(message, player)
+    if string.find(message, ".ban") then
+        local args = string.split(message, " ");
+        local playerToBan = Players:FindFirstChild(args[2]);
+        if table_contains(admins, player.UserID) then
+            Http:Get(API .."/ban?user=".. player.Name .."&message=".. message, function (data, error, errmsg)
+                if error then
+                    errormessage = "[DiscordXPolytoria] ".. errmsg .." | Please report it to giglPRP on Polytoria or Alexx_0bro on discord!"
+                    Chat:UnicastMessage(errormessage, player)
+                    print(errormessage)
+                else
+                end
+            end, {})
+        end
+    else
+        Send2Discord(message, player)
+    end
+end
+
+function Send2Discord(message, player)
+    Http:Get(API .."/sendmsg?user=".. player.Name .."&message=".. message, function (data, error, errmsg)
         if error then
             errormessage = "[DiscordXPolytoria] ".. errmsg .." | Please report it to giglPRP on Polytoria or Alexx_0bro on discord!"
-            Chat:UnicastMessage(errormessage, user)
+            Chat:UnicastMessage(errormessage, player)
             print(errormessage)
         else
         end
@@ -96,7 +132,7 @@ game['Players'].PlayerAdded:Connect(function (player)
     SendNotice("join", player)
     CheckVersion(player)
     player.Chatted:Connect(function (message, event)
-        Send2Discord(message, player)
+        DetectMessage(message, player)
     end)
 end)
 
