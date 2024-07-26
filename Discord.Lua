@@ -7,9 +7,8 @@ CurrentVersion = ""
 CurrentAPIVersion = ""
 Invite = "https://discord.gg/9GUJ8NWbKu" -- if you dont have a discord just make it "nope"
 API = "https://frequent-satisfying-indigo.glitch.me" -- put here the link to your DiscordXPolytoria API
-ID = 
 
-local admins = {
+admins = {
     "000000000", -- You can put your admin's id here. 
     "000000000", 
 }
